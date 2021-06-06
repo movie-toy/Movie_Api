@@ -19,7 +19,7 @@ public class DailyMovie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String boxofficeType;
     private String showRange;
     private String rnum;

@@ -19,7 +19,7 @@ public class MovieList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String movieCd;
     private String movieNm;
     private String movieNmEn;
