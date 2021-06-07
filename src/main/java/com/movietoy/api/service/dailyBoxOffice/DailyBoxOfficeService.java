@@ -26,36 +26,23 @@ public class DailyBoxOfficeService {
 
     private final DailyMovieRepository dailyMovieRepository;
 
-    //모든 일간 박스오피스 리스트
-    public List<DailyMovie> AllDailyBoxOfficeList(){
-        List<DailyMovie> dailyBoxOfficeList = dailyMovieRepository.findAll();
-        return dailyBoxOfficeList;
-    }
-
-    //어제 날짜의 일간 박스오피스 리스트( 오늘 보여질 박스 오피스 )
-    public List<DailyMovie> TodayDailyBoxOfficeList(){
+    //일간 박스오피스 리스트
+    public List<DailyMovie> DailyBoxOfficeList(){
 
         //어제 일자 구해오기
         LocalDateTime time = LocalDateTime.now().minusDays(1);
-        String targetDt =  time.format(DateTimeFormatter.ofPattern("yyyMMdd"));
+        String targetDt =  time.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         List<DailyMovie> dailyBoxOfficeList = dailyMovieRepository.findAllByTargetDt(targetDt);
         return dailyBoxOfficeList;
     }
 
-    //전체 리스트 페이징 
-    public Page<DailyMovie> PagingAllDailyBoxOfficeList(Pageable pageable)
-    {
-        Page<DailyMovie> pagingDailyBoxOfficeList = dailyMovieRepository.findAll(pageable);
-        return pagingDailyBoxOfficeList;
-    }
-
     //일간 박스오피스 페이징
-    public Page<DailyMovie> PagingTodayDailyBoxOfficeList()
+    public Page<DailyMovie> PagingDailyBoxOfficeList()
     {
         //어제 일자 구해오기
         LocalDateTime time = LocalDateTime.now().minusDays(1);
-        String targetDt =  time.format(DateTimeFormatter.ofPattern("yyyMMdd"));
+        String targetDt =  time.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         Page<DailyMovie> pagingDailyBoxOfficeList = dailyMovieRepository.findAllByTargetDt(targetDt, PageRequest.of(0,5, Sort.Direction.ASC,"id"));
         return pagingDailyBoxOfficeList;
     }

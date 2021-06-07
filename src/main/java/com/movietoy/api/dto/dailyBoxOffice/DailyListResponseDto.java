@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class DailyListResponseDto {
 
-    private Long Id;
+    private Long id;
     private String boxofficeType;
     private String showRange;
     private String rnum;

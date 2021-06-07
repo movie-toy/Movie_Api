@@ -22,6 +22,8 @@ public class WeeklyMovie {
     private Long id;
     private String boxofficeType;
     private String showRange;
+    private String startRange;
+    private String endRange;
     private String yearWeekTime;
     private String rnum;
     private String rank;

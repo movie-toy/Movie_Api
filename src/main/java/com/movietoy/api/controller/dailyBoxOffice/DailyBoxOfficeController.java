@@ -25,25 +25,11 @@ public class DailyBoxOfficeController {
     @Autowired
     public DailyBoxOfficeService dailyBoxOfficeService;
 
-/*    @RequestMapping(value = "/daily/allList")
-    public ResponseEntity<List<DailyMovie>> AllDailyBoxOfficeList(){
-        
-        //일간 박스오피스 모든 리스트 가져오기
-        List<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.AllDailyBoxOfficeList();
-        
-        //Header 입력
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Content-Type","application/json");
-
-
-        return new ResponseEntity<List<DailyMovie>>(dailyBoxOfficeList, httpHeaders, HttpStatus.OK);
-    }*/
-
     @RequestMapping(value = "/daily/list")
-    public ResponseEntity<List<DailyMovie>> TodayDailyBoxOfficeList(){
+    public ResponseEntity<List<DailyMovie>> DailyBoxOfficeList(){
 
         //일간 박스오피스 리스트
-        List<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.TodayDailyBoxOfficeList();
+        List<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.DailyBoxOfficeList();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type","application/json");
@@ -51,16 +37,10 @@ public class DailyBoxOfficeController {
         return new ResponseEntity<List<DailyMovie>>(dailyBoxOfficeList, HttpStatus.OK);
     }
 
-/*    @RequestMapping(value = "/daily/pagingAllList")
-    public ResponseEntity<Page<DailyMovie>> PagingAllDailyBoxOfficeList(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
-        Page<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.PagingAllDailyBoxOfficeList(pageable);
-        return new ResponseEntity<Page<DailyMovie>>(dailyBoxOfficeList, HttpStatus.OK);
-    }*/
+    @RequestMapping(value = "/daily/paging")
+    public ResponseEntity<Page<DailyMovie>> PagingDailyBoxOfficeList(){
 
-    @RequestMapping(value = "/daily/listPaging")
-    public ResponseEntity<Page<DailyMovie>> PagingTodayDailyBoxOfficeList(){
-
-        Page<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.PagingTodayDailyBoxOfficeList();
+        Page<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.PagingDailyBoxOfficeList();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type","application/json");
