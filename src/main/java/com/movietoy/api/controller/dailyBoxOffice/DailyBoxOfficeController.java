@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,27 +25,46 @@ public class DailyBoxOfficeController {
     @Autowired
     public DailyBoxOfficeService dailyBoxOfficeService;
 
-    @RequestMapping(value = "/daily/allList")
+/*    @RequestMapping(value = "/daily/allList")
     public ResponseEntity<List<DailyMovie>> AllDailyBoxOfficeList(){
+        
+        //일간 박스오피스 모든 리스트 가져오기
         List<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.AllDailyBoxOfficeList();
-        return new ResponseEntity<List<DailyMovie>>(dailyBoxOfficeList, HttpStatus.OK);
-    }
+        
+        //Header 입력
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Content-Type","application/json");
 
-    @RequestMapping(value = "/daily/todayList")
+
+        return new ResponseEntity<List<DailyMovie>>(dailyBoxOfficeList, httpHeaders, HttpStatus.OK);
+    }*/
+
+    @RequestMapping(value = "/daily/list")
     public ResponseEntity<List<DailyMovie>> TodayDailyBoxOfficeList(){
+
+        //일간 박스오피스 리스트
         List<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.TodayDailyBoxOfficeList();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Content-Type","application/json");
+
         return new ResponseEntity<List<DailyMovie>>(dailyBoxOfficeList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/daily/pagingAllList")
+/*    @RequestMapping(value = "/daily/pagingAllList")
     public ResponseEntity<Page<DailyMovie>> PagingAllDailyBoxOfficeList(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
         Page<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.PagingAllDailyBoxOfficeList(pageable);
         return new ResponseEntity<Page<DailyMovie>>(dailyBoxOfficeList, HttpStatus.OK);
-    }
+    }*/
 
-    @RequestMapping(value = "/daily/pagingTodayList")
+    @RequestMapping(value = "/daily/listPaging")
     public ResponseEntity<Page<DailyMovie>> PagingTodayDailyBoxOfficeList(){
+
         Page<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.PagingTodayDailyBoxOfficeList();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Content-Type","application/json");
+
         return new ResponseEntity<Page<DailyMovie>>(dailyBoxOfficeList, HttpStatus.OK);
     }
 
