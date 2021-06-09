@@ -4,6 +4,9 @@ spring:
     url: jdbc:mysql://27.96.130.90:3306/Movie_Toy?serverTimezone=Asia/Seoul
     username: root
     password: Toyproject1!
+  redis:
+    host: 27.96.130.90
+    port: 6379
 
   jpa:
     open-in-view: true

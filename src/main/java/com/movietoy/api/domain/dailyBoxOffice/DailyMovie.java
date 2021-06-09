@@ -9,13 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class DailyMovie {
+public class DailyMovie{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
