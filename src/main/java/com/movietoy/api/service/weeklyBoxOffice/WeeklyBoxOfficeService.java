@@ -40,7 +40,7 @@ public class WeeklyBoxOfficeService {
     }
 
     //주간 박스오피스 페이징
-    public Page<WeeklyMovie> PagingWeeklyBoxOfficeList()
+    public Page<WeeklyMovie> PagingWeeklyBoxOfficeList(int page)
     {
         //어제 일자 구해오기
         LocalDateTime time = LocalDateTime.now();
@@ -54,7 +54,7 @@ public class WeeklyBoxOfficeService {
         //년도+주차
         String yearWeekTime = year+weekOfYear;
 
-        Page<WeeklyMovie> weeklyBoxOfficeList = weeklyMovieRepository.findAllByYearWeekTime(yearWeekTime, PageRequest.of(0,5, Sort.Direction.ASC,"id"));
+        Page<WeeklyMovie> weeklyBoxOfficeList = weeklyMovieRepository.findAllByYearWeekTime(yearWeekTime, PageRequest.of(page,5, Sort.Direction.ASC,"id"));
         return weeklyBoxOfficeList;
     }
 }

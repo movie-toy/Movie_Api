@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.Cacheable;
@@ -36,10 +37,10 @@ public class WeeklyBoxOfficeController {
     }
 
     @RequestMapping(value = "/weekly/paging")
-    public ResponseEntity<Page<WeeklyMovie>> PagingWeeklyBoxOfficeList(){
+    public ResponseEntity<Page<WeeklyMovie>> PagingWeeklyBoxOfficeList(@RequestParam(defaultValue = "0") int page){
 
         //주간 박스오피스 페이징
-        Page<WeeklyMovie> weeklyBoxOfficeList = weeklyBoxOfficeService.PagingWeeklyBoxOfficeList();
+        Page<WeeklyMovie> weeklyBoxOfficeList = weeklyBoxOfficeService.PagingWeeklyBoxOfficeList(page);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type","application/json");
