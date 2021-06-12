@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.movietoy'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '1.8'
 
 configurations {
     compileOnly {
@@ -23,7 +23,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
-    compileOnly('org.springframework.boot:spring-boot-starter-data-redis')
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -33,4 +32,11 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+
+bootJar{
+    archivesBaseName = 'MovieApi'
+    archiveFileName = 'MovieApi.jar'
+    archiveVersion = "0.0.1"
 }
