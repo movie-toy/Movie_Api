@@ -1,6 +1,5 @@
 package com.movietoy.api.service.weeklyBoxOffice;
 
-import com.movietoy.api.domain.dailyBoxOffice.DailyMovie;
 import com.movietoy.api.domain.weeklyBoxOffice.WeeklyMovie;
 import com.movietoy.api.domain.weeklyBoxOffice.WeeklyMovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +56,7 @@ public class WeeklyBoxOfficeService {
         String yearWeekTime = year+weekOfYear;
 
         Page<WeeklyMovie> weeklyBoxOfficeList = weeklyMovieRepository.findAllByYearWeekTime(yearWeekTime, PageRequest.of(page,5, Sort.Direction.ASC,"id"));
+
         return weeklyBoxOfficeList;
     }
 }
