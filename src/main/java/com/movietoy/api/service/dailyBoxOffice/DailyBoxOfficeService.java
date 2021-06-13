@@ -28,6 +28,7 @@ public class DailyBoxOfficeService {
     private final DailyMovieRepository dailyMovieRepository;
 
     //일간 박스오피스 리스트
+    @Cacheable("DailyBoxOfficeList")
     public List<DailyMovie> DailyBoxOfficeList(){
         //어제 일자 구해오기
         LocalDateTime time = LocalDateTime.now().minusDays(1);

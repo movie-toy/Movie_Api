@@ -4,6 +4,7 @@ import com.movietoy.api.domain.dailyBoxOffice.DailyMovie;
 import com.movietoy.api.domain.weeklyBoxOffice.WeeklyMovie;
 import com.movietoy.api.domain.weeklyBoxOffice.WeeklyMovieRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,7 @@ public class WeeklyBoxOfficeService {
     private final WeeklyMovieRepository weeklyMovieRepository;
 
     //금주의 주간 박스오피스 리스트
+    @Cacheable("WeeklyBoxOfficeList")
     public List<WeeklyMovie> WeeklyBoxOfficeList(){
 
         //오늘 년도 구해오기
