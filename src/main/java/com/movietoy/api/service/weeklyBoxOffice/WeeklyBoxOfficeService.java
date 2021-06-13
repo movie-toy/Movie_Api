@@ -9,10 +9,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +33,19 @@ public class WeeklyBoxOfficeService {
 
         //해당 년의 몇주차인지 가져오기
         Calendar now = Calendar.getInstance();
+        //오늘이 무슨 요일인지 가져오기 ( 1:일 , 2:월, 3:화 .... 7:토)
+        int todayDate = now.get(Calendar.DAY_OF_WEEK);
+        System.out.println(todayDate);
+        //오늘이 몇주차인지 가져오기
         int getweekOfYear = now.get(Calendar.WEEK_OF_YEAR);
-        String weekOfYear = Integer.toString(getweekOfYear-2);
 
-        //년도+주차
+        String weekOfYear;
+        if(todayDate == 1){ //일요일이면 -3
+            weekOfYear = Integer.toString(getweekOfYear-3);
+        }else{  //나머지는 -2
+            weekOfYear = Integer.toString(getweekOfYear-2);
+        }
+
         String yearWeekTime = year+weekOfYear;
 
         List<WeeklyMovie> weeklyBoxOfficeList = weeklyMovieRepository.findAllByYearWeekTime(yearWeekTime);
