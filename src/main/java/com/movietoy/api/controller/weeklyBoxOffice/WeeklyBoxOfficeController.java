@@ -33,14 +33,14 @@ public class WeeklyBoxOfficeController {
     }
 
     @RequestMapping(value = "/weekly/paging")
-    public ResponseEntity<Page<WeeklyMovie>> PagingWeeklyBoxOfficeList(@RequestParam(defaultValue = "0") int page){
+    public ResponseEntity<List<WeeklyMovie>> PagingWeeklyBoxOfficeList(@RequestParam(defaultValue = "0") int page){
 
         //주간 박스오피스 페이징
-        Page<WeeklyMovie> weeklyBoxOfficeList = weeklyBoxOfficeService.PagingWeeklyBoxOfficeList(page);
+        List<WeeklyMovie> weeklyBoxOfficeList = weeklyBoxOfficeService.PagingWeeklyBoxOfficeList(page);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type","application/json");
 
-        return new ResponseEntity<Page<WeeklyMovie>>(weeklyBoxOfficeList, HttpStatus.OK);
+        return new ResponseEntity<List<WeeklyMovie>>(weeklyBoxOfficeList, HttpStatus.OK);
     }
 }

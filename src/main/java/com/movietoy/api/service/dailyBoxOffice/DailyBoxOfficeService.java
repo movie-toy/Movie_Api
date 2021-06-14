@@ -40,6 +40,7 @@ public class DailyBoxOfficeService {
         Page<DailyMovie> pagingDailyBoxOfficeList = dailyMovieRepository.findAllByTargetDt(targetDt, PageRequest.of(page,5, Sort.Direction.ASC,"id"));
         //페이징 처리된 Data만 리스트로 넘겨주기
         List<DailyMovie> dailyBoxOfficeList = pagingDailyBoxOfficeList.getContent();
+
         return dailyBoxOfficeList;
     }
 }
