@@ -30,7 +30,7 @@ public class DailyBoxOfficeService {
     }
 
     //일간 박스오피스 페이징
-    @Cacheable("PagingDailyBoxOfficeList")
+    @Cacheable("DailyBoxOfficeList")
     public List<DailyMovie> PagingDailyBoxOfficeList(int page)
     {
         //어제 일자 구해오기

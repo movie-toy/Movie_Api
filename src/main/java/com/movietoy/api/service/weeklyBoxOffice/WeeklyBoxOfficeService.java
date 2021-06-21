@@ -54,6 +54,7 @@ public class WeeklyBoxOfficeService {
     }
 
     //주간 박스오피스 페이징
+    @Cacheable("WeeklyBoxOfficeList")
     public List<WeeklyMovie> PagingWeeklyBoxOfficeList(int page)
     {
         //오늘 년도 구해오기
