@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class WeeklyBoxOfficeController {
     public WeeklyBoxOfficeService weeklyBoxOfficeService;
 
 
-    @RequestMapping(value = "/weekly/list")
+    @GetMapping(value = "/weekly/list")
     public ResponseEntity<List<WeeklyMovie>> WeeklyBoxOfficeList(){
 
         //주간 박스오피스 리스트
@@ -32,7 +33,7 @@ public class WeeklyBoxOfficeController {
         return new ResponseEntity<List<WeeklyMovie>>(weeklyBoxOfficeList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/weekly/paging")
+    @GetMapping(value = "/weekly/paging")
     public ResponseEntity<List<WeeklyMovie>> PagingWeeklyBoxOfficeList(@RequestParam(defaultValue = "0") int page){
 
         //주간 박스오피스 페이징

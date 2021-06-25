@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class WeeklyBoxOfficeService {
 
     //금주의 주간 박스오피스 리스트
     @Cacheable("WeeklyBoxOfficeList")
+    @Transactional(readOnly = true)
     public List<WeeklyMovie> WeeklyBoxOfficeList(){
 
         //오늘 년도 구해오기
@@ -55,6 +57,7 @@ public class WeeklyBoxOfficeService {
 
     //주간 박스오피스 페이징
     @Cacheable("WeeklyBoxOfficeList")
+    @Transactional(readOnly = true)
     public List<WeeklyMovie> PagingWeeklyBoxOfficeList(int page)
     {
         //오늘 년도 구해오기

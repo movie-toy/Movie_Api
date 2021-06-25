@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +22,7 @@ public class DailyBoxOfficeService {
 
     //일간 박스오피스 리스트
     @Cacheable("DailyBoxOfficeList")
+    @Transactional(readOnly = true)
     public List<DailyMovie> DailyBoxOfficeList(){
         //어제 일자 구해오기
         LocalDateTime time = LocalDateTime.now().minusDays(1);
@@ -31,6 +33,7 @@ public class DailyBoxOfficeService {
 
     //일간 박스오피스 페이징
     @Cacheable("DailyBoxOfficeList")
+    @Transactional(readOnly = true)
     public List<DailyMovie> PagingDailyBoxOfficeList(int page)
     {
         //어제 일자 구해오기

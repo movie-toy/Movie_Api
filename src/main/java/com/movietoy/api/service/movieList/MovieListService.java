@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +23,7 @@ public class MovieListService {
 
     //일간 박스오피스 리스트
     @Cacheable("MovieList")
+    @Transactional(readOnly = true)
     public List<MovieList> MovieList(){
         List<MovieList> movieList = movieListRepository.findAll();
 
@@ -30,6 +32,7 @@ public class MovieListService {
 
     //일간 박스오피스 페이징
     @Cacheable("PagingMovieList")
+    @Transactional(readOnly = true)
     public List<MovieList> PagingMovieList(int page)
     {
         //Paging 객체 가져오기
