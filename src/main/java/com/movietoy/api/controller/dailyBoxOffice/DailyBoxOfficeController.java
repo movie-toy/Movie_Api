@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,15 @@ public class DailyBoxOfficeController {
     @GetMapping(value = "/daily/paging")
     public ResponseEntity<List<DailyMovie>> PagingDailyBoxOfficeList(@RequestParam(defaultValue = "0") int page){
 
-        List<DailyMovie> dailyBoxOfficeList = dailyBoxOfficeService.PagingDailyBoxOfficeList(page);
+        List<DailyMovie> dailyBoxOfficeList = new ArrayList<>();
+
+        //첫 0페이지는 캐싱
+        if(page == 0){
+            dailyBoxOfficeList = dailyBoxOfficeService.CacheablePagingDailyBoxOfficeList(page);
+        //아니면 캐싱제외
+        }else{
+            dailyBoxOfficeList = dailyBoxOfficeService.PagingDailyBoxOfficeList(page);
+        }
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type","application/json");

@@ -20,7 +20,7 @@ public class DailyBoxOfficeService {
 
     private final DailyMovieRepository dailyMovieRepository;
 
-    //일간 박스오피스 리스트
+    //일간 박스오피스 리스트 캐싱
     @Cacheable("DailyBoxOfficeList")
     @Transactional(readOnly = true)
     public List<DailyMovie> DailyBoxOfficeList(){
@@ -31,8 +31,23 @@ public class DailyBoxOfficeService {
         return dailyBoxOfficeList;
     }
 
-    //일간 박스오피스 페이징
+    //일간 박스오피스 페이징 캐싱
     @Cacheable("DailyBoxOfficeList")
+    @Transactional(readOnly = true)
+    public List<DailyMovie> CacheablePagingDailyBoxOfficeList(int page)
+    {
+        //어제 일자 구해오기
+        LocalDateTime time = LocalDateTime.now().minusDays(1);
+        String targetDt =  time.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        //Paging 객체 가져오기
+        Page<DailyMovie> pagingDailyBoxOfficeList = dailyMovieRepository.findAllByTargetDt(targetDt, PageRequest.of(page,5, Sort.Direction.ASC,"id"));
+        //페이징 처리된 Data만 리스트로 넘겨주기
+        List<DailyMovie> dailyBoxOfficeList = pagingDailyBoxOfficeList.getContent();
+
+        return dailyBoxOfficeList;
+    }
+
+    //일간 박스오피스 페이징
     @Transactional(readOnly = true)
     public List<DailyMovie> PagingDailyBoxOfficeList(int page)
     {
