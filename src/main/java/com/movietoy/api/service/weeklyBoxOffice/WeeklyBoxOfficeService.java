@@ -38,7 +38,6 @@ public class WeeklyBoxOfficeService {
         Calendar now = Calendar.getInstance();
         //오늘이 무슨 요일인지 가져오기 ( 1:일 , 2:월, 3:화 .... 7:토)
         int todayDate = now.get(Calendar.DAY_OF_WEEK);
-        System.out.println(todayDate);
         //오늘이 몇주차인지 가져오기
         int getweekOfYear = now.get(Calendar.WEEK_OF_YEAR);
 
@@ -55,8 +54,41 @@ public class WeeklyBoxOfficeService {
         return weeklyBoxOfficeList;
     }
 
-    //주간 박스오피스 페이징
+
+    //주간 박스오피스 페이징 캐싱
     @Cacheable("WeeklyBoxOfficeList")
+    @Transactional(readOnly = true)
+    public List<WeeklyMovie> CacheablePagingWeeklyBoxOfficeList(int page)
+    {
+        //오늘 년도 구해오기
+        LocalDateTime time = LocalDateTime.now();
+        String year = time.format(DateTimeFormatter.ofPattern("yyyy"));
+
+        //해당 년의 몇주차인지 가져오기
+        Calendar now = Calendar.getInstance();
+        //오늘이 무슨 요일인지 가져오기 ( 1:일 , 2:월, 3:화 .... 7:토)
+        int todayDate = now.get(Calendar.DAY_OF_WEEK);
+        //오늘이 몇주차인지 가져오기
+        int getweekOfYear = now.get(Calendar.WEEK_OF_YEAR);
+
+        String weekOfYear;
+        if(todayDate == 1){ //일요일이면 -3
+            weekOfYear = Integer.toString(getweekOfYear-3);
+        }else{  //나머지는 -2
+            weekOfYear = Integer.toString(getweekOfYear-2);
+        }
+
+        String yearWeekTime = year+weekOfYear;
+
+        Page<WeeklyMovie> pagingWeeklyBoxOfficeList = weeklyMovieRepository.findAllByYearWeekTime(yearWeekTime, PageRequest.of(page,5, Sort.Direction.ASC,"id"));
+
+        //페이징 처리된 Data만 리스트로 넘겨주기
+        List<WeeklyMovie> weeklyBoxOfficeList = pagingWeeklyBoxOfficeList.getContent();
+
+        return weeklyBoxOfficeList;
+    }
+
+    //주간 박스오피스 페이징 캐싱
     @Transactional(readOnly = true)
     public List<WeeklyMovie> PagingWeeklyBoxOfficeList(int page)
     {
@@ -68,7 +100,6 @@ public class WeeklyBoxOfficeService {
         Calendar now = Calendar.getInstance();
         //오늘이 무슨 요일인지 가져오기 ( 1:일 , 2:월, 3:화 .... 7:토)
         int todayDate = now.get(Calendar.DAY_OF_WEEK);
-        System.out.println(todayDate);
         //오늘이 몇주차인지 가져오기
         int getweekOfYear = now.get(Calendar.WEEK_OF_YEAR);
 

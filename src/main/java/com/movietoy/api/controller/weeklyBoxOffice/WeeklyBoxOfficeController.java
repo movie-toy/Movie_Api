@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,18 +31,24 @@ public class WeeklyBoxOfficeController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type","application/json");
 
-        return new ResponseEntity<List<WeeklyMovie>>(weeklyBoxOfficeList, HttpStatus.OK);
+        return new ResponseEntity<>(weeklyBoxOfficeList, HttpStatus.OK);
     }
 
     @GetMapping(value = "/weekly/paging")
     public ResponseEntity<List<WeeklyMovie>> PagingWeeklyBoxOfficeList(@RequestParam(defaultValue = "0") int page){
+        List<WeeklyMovie> weeklyBoxOfficeList = new ArrayList<>();
 
-        //주간 박스오피스 페이징
-        List<WeeklyMovie> weeklyBoxOfficeList = weeklyBoxOfficeService.PagingWeeklyBoxOfficeList(page);
+        //첫 0페이지는 캐싱
+        if(page == 0){
+            weeklyBoxOfficeList = weeklyBoxOfficeService.PagingWeeklyBoxOfficeList(page);
+        //아니면 캐싱제외
+        }else{
+            weeklyBoxOfficeList = weeklyBoxOfficeService.PagingWeeklyBoxOfficeList(page);
+        }
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Type","application/json");
 
-        return new ResponseEntity<List<WeeklyMovie>>(weeklyBoxOfficeList, HttpStatus.OK);
+        return new ResponseEntity<>(weeklyBoxOfficeList, HttpStatus.OK);
     }
 }
