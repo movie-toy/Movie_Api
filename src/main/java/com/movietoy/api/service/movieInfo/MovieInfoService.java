@@ -1,10 +1,7 @@
 package com.movietoy.api.service.movieInfo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.movietoy.api.domain.movieInfo.Actors;
-import com.movietoy.api.domain.movieInfo.Genres;
-import com.movietoy.api.domain.movieInfo.MovieInfo;
-import com.movietoy.api.domain.movieInfo.MovieInfoRepository;
+import com.movietoy.api.domain.movieInfo.*;
 import com.movietoy.api.dto.movieInfo.MovieInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -46,6 +43,45 @@ public class MovieInfoService {
             }
         }
 
+        //심의정보 Data 넣기
+        String audits = movieInfo.getAudits();
+        Object auditsObj = jsonParser.parse(audits);
+        JSONArray auditsJsonArray = (JSONArray) auditsObj;
+        List<Audits> auditsList = new ArrayList<>();
+        if (auditsJsonArray != null) {
+            for (int i=0; i<auditsJsonArray.size(); i++){
+                JSONObject auditsJsonObject = (JSONObject) auditsJsonArray.get(i);
+                Audits audits1 = objectMapper.readValue(auditsJsonObject.toString(), Audits.class);
+                auditsList.add(audits1);
+            }
+        }
+
+        //제작사 Data 넣기
+        String companys = movieInfo.getCompanys();
+        Object companysObj = jsonParser.parse(companys);
+        JSONArray companysJsonArray = (JSONArray) companysObj;
+        List<Companys> companysList = new ArrayList<>();
+        if (companysJsonArray != null) {
+            for (int i=0; i<companysJsonArray.size(); i++){
+                JSONObject auditsJsonObject = (JSONObject) companysJsonArray.get(i);
+                Companys companys1 = objectMapper.readValue(auditsJsonObject.toString(), Companys.class);
+                companysList.add(companys1);
+            }
+        }
+
+        //영화감독 Data 넣기
+        String directors = movieInfo.getDirectors();
+        Object directorsObj = jsonParser.parse(directors);
+        JSONArray directorsJsonArray = (JSONArray) directorsObj;
+        List<Directors> directorsList = new ArrayList<>();
+        if (directorsJsonArray != null) {
+            for (int i=0; i<directorsJsonArray.size(); i++){
+                JSONObject directorsJsonObject = (JSONObject) directorsJsonArray.get(i);
+                Directors directors1 = objectMapper.readValue(directorsJsonObject.toString(), Directors.class);
+                directorsList.add(directors1);
+            }
+        }
+
         //장르 Data 넣기
         String genres = movieInfo.getGenres();
         Object genresObj = jsonParser.parse(genres);
@@ -59,9 +95,22 @@ public class MovieInfoService {
             }
         }
 
+        //제작국가 Data 넣기
+        String nations = movieInfo.getNations();
+        Object nationsObj = jsonParser.parse(nations);
+        JSONArray nationsJsonArray = (JSONArray) nationsObj;
+        List<Nations> nationsList = new ArrayList<>();
+        if (nationsJsonArray != null) {
+            for (int i=0; i<nationsJsonArray.size(); i++){
+                JSONObject nationsJsonObject = (JSONObject) nationsJsonArray.get(i);
+                Nations Nations1 = objectMapper.readValue(nationsJsonObject.toString(), Nations.class);
+                nationsList.add(Nations1);
+            }
+        }
 
 
         MovieInfoResponseDto movieInfoResponseDto = MovieInfoResponseDto.builder()
+                .id(movieInfo.getId())
                 .movieCd(movieInfo.getMovieCd())
                 .movieNm(movieInfo.getMovieNm())
                 .movieNmEn(movieInfo.getMovieNmEn())
@@ -71,7 +120,11 @@ public class MovieInfoService {
                 .prdtStatNm(movieInfo.getPrdtStatNm())
                 .typeNm(movieInfo.getTypeNm())
                 .actors(actorsList)
+                .audits(auditsList)
+                .companys(companysList)
+                .directors(directorsList)
                 .genres(genresList)
+                .nations(nationsList)
                 .build();
 
         return movieInfoResponseDto;
