@@ -1,20 +1,17 @@
 package com.movietoy.api.dto.movieInfo;
 
-import com.movietoy.api.domain.movieInfo.*;
-import lombok.AllArgsConstructor;
+import com.movietoy.api.domain.movieInfo.Object.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.tool.schema.extract.spi.NameSpaceTablesInformation;
 
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 public class MovieInfoResponseDto {
 
-    private Long Id;
+    private Long id;
 
     private String movieCd;
 
@@ -51,8 +48,9 @@ public class MovieInfoResponseDto {
     private List<Nations> nations;
 
     @Builder
+
     public MovieInfoResponseDto(Long id, String movieCd, String movieNm, String movieNmEn, String movieNmOg, String prdtYear, String openDt, String prdtStatNm, String typeNm, List<Actors> actors, List<Genres> genres, List<Audits> audits, List<Companys> companys, List<Directors> directors, List<Nations> nations) {
-        Id = id;
+        this.id = id;
         this.movieCd = movieCd;
         this.movieNm = movieNm;
         this.movieNmEn = movieNmEn;

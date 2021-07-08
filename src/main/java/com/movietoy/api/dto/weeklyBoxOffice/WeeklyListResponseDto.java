@@ -2,7 +2,7 @@ package com.movietoy.api.dto.weeklyBoxOffice;
 
 public class WeeklyListResponseDto {
 
-    private Long id;
+    private Long Id;
     private String boxofficeType;
     private String showRange;
     private String yearWeekTime;

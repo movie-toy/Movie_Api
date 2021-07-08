@@ -1,6 +1,5 @@
 package com.movietoy.api.service.weeklyBoxOffice;
 
-import com.movietoy.api.domain.dailyBoxOffice.DailyMovie;
 import com.movietoy.api.domain.weeklyBoxOffice.WeeklyMovie;
 import com.movietoy.api.domain.weeklyBoxOffice.WeeklyMovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +10,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.WeekFields;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor

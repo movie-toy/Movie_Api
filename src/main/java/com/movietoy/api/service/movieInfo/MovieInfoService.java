@@ -1,13 +1,14 @@
 package com.movietoy.api.service.movieInfo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.movietoy.api.domain.movieInfo.*;
+import com.movietoy.api.domain.movieInfo.MovieInfo;
+import com.movietoy.api.domain.movieInfo.MovieInfoRepository;
+import com.movietoy.api.domain.movieInfo.Object.*;
 import com.movietoy.api.dto.movieInfo.MovieInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

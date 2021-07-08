@@ -3,11 +3,9 @@ package com.movietoy.api.dto.dailyBoxOffice;
 import lombok.Builder;
 import lombok.Data;
 
-@Data
-@Builder
 public class DailyListResponseDto {
 
-    private Long id;
+    private Long Id;
     private String boxofficeType;
     private String showRange;
     private String rnum;
