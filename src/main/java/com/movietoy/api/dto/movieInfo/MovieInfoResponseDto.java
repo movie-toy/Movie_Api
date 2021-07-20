@@ -48,7 +48,6 @@ public class MovieInfoResponseDto {
     private List<Nations> nations;
 
     @Builder
-
     public MovieInfoResponseDto(Long id, String movieCd, String movieNm, String movieNmEn, String movieNmOg, String prdtYear, String openDt, String prdtStatNm, String typeNm, List<Actors> actors, List<Genres> genres, List<Audits> audits, List<Companys> companys, List<Directors> directors, List<Nations> nations) {
         this.id = id;
         this.movieCd = movieCd;
